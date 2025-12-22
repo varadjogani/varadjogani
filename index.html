@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* --- VARIABLES & RESET --- */
+        :root {
+            --glass-bg: rgba(255, 255, 255, 0.1);
+            --glass-border: rgba(255, 255, 255, 0.2);
+            --glass-highlight: rgba(255, 255, 255, 0.05);
+            --text-primary: #ffffff;
+            --text-secondary: rgba(255, 255, 255, 0.7);
+            --accent-glow: rgba(0, 122, 255, 0.6); /* Apple Blue Glow */
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            color: var(--text-primary);
+            min-height: 100vh;
+            overflow-x: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        /* --- ANIMATED LIQUID BACKGROUND --- */
+        .liquid-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: linear-gradient(-45deg, #0f0c29, #302b63, #24243e, #1a0b2e);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+        }
+
+        /* Floating orbs for extra "Liquid" feel */
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            z-index: -1;
+            animation: floatOrb 10s infinite ease-in-out;
+        }
+        .orb-1 { width: 300px; height: 300px; background: #6600ff; top: 10%; left: 10%; }
+        .orb-2 { width: 400px; height: 400px; background: #00ccff; bottom: 10%; right: 10%; animation-delay: -5s; }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        @keyframes floatOrb {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(30px, -50px); }
+        }
+
+        /* --- MAIN GLASS CONTAINER --- */
+        .glass-container {
+            width: 100%;
+            max-width: 600px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px); /* Safari support */
+            border-radius: 30px;
+            border: 1px solid var(--glass-border);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+            overflow: hidden;
+            position: relative;
+            min-height: 80vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* --- VIEWS (HOME & DOWNLOADS) --- */
+        .view-section {
+            padding: 40px 30px;
+            width: 100%;
+            transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.5s ease;
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            overflow-y: auto;
+            /* Hide scrollbar */
+            scrollbar-width: none; 
+            -ms-overflow-style: none;
+        }
+        .view-section::-webkit-scrollbar { display: none; }
+
+        /* Animation States */
+        .view-active {
+            transform: translateX(0);
+            opacity: 1;
+            z-index: 2;
+            pointer-events: all;
+            position: relative; /* Make it flow normally */
+        }
+        .view-hidden-left {
+            transform: translateX(-50px);
+            opacity: 0;
+            z-index: 1;
+            pointer-events: none;
+            position: absolute;
+        }
+        .view-hidden-right {
+            transform: translateX(50px);
+            opacity: 0;
+            z-index: 1;
+            pointer-events: none;
+            position: absolute;
+        }
+
+        /* --- PROFILE STYLES --- */
+        .profile-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .profile-pic {
+            width: 110px;
+            height: 110px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid rgba(255, 255, 255, 0.4);
+            margin-bottom: 15px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+
+        h1 {
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            margin-bottom: 5px;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+
+        .subtitle {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+
+        /* --- BUTTONS (LINKS) --- */
+        .link-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            padding: 18px;
+            margin-bottom: 15px;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid var(--glass-border);
+            border-radius: 18px;
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .link-btn i {
+            margin-right: 12px;
+            font-size: 1.2rem;
+        }
+
+        .link-btn:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: scale(1.02);
+            box-shadow: 0 0 20px var(--accent-glow);
+            border-color: rgba(255, 255, 255, 0.5);
+        }
+
+        .special-btn {
+            background: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+        }
+
+        /* --- GALLERY STYLES --- */
+        .nav-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .back-btn {
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            transition: color 0.3s;
+        }
+        .back-btn:hover { color: white; }
+        .back-btn i { margin-right: 8px; }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            padding-bottom: 20px;
+        }
+
+        .gallery-item {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            aspect-ratio: 1/1;
+            background: rgba(0,0,0,0.2);
+            border: 1px solid var(--glass-border);
+            cursor: pointer;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        /* Download Icon Overlay */
+        .download-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(0,0,0,0.4);
+            backdrop-filter: blur(4px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .gallery-item:hover .download-overlay {
+            opacity: 1;
+        }
+
+        /* For mobile, show a small icon in corner always */
+        @media (max-width: 600px) {
+            .download-overlay {
+                background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+                align-items: flex-end;
+                padding-bottom: 15px;
+                opacity: 1;
+            }
+        }
+
+        .dl-icon-btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.2);
+            border: 1px solid rgba(255,255,255,0.4);
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.2rem;
+            cursor: pointer;
+            backdrop-filter: blur(10px);
+        }
+        
+        .dl-icon-btn:hover {
+            background: white;
+            color: black;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 30px;
+            color: var(--text-secondary);
+            font-size: 0.8rem;
+        }
+
+        /* Toast Notification */
+        #toast {
+            visibility: hidden;
+            min-width: 250px;
+            background-color: rgba(255,255,255,0.15);
+            backdrop-filter: blur(10px);
+            color: #fff;
+            text-align: center;
+            border-radius: 50px;
+            padding: 16px;
+            position: fixed;
+            z-index: 100;
+            left: 50%;
+            bottom: 30px;
+            transform: translateX(-50%);
+            border: 1px solid rgba(255,255,255,0.2);
+            font-size: 0.9rem;
+            opacity: 0;
+            transition: opacity 0.3s, bottom 0.3s;
+        }
+        #toast.show {
+            visibility: visible;
+            opacity: 1;
+            bottom: 50px;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="liquid-background"></div>
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+
+    <div class="glass-container">
+        
+        <div id="home-view" class="view-section view-active">
+            <header class="profile-header">
+                <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&h=400&fit=crop" alt="Profile" class="profile-pic">
+                <h1>Your Name</h1>
+                <p class="subtitle">Digital Artist & Photographer</p>
+            </header>
+
+            <main class="links-list">
+                <a href="https://instagram.com" target="_blank" class="link-btn">
+                    <i class="fab fa-instagram"></i> Instagram
+                </a>
+                <a href="https://twitter.com" target="_blank" class="link-btn">
+                    <i class="fab fa-twitter"></i> Twitter / X
+                </a>
+                <a href="https://tiktok.com" target="_blank" class="link-btn">
+                    <i class="fab fa-tiktok"></i> TikTok
+                </a>
+                <a href="mailto:email@example.com" class="link-btn">
+                    <i class="fas fa-envelope"></i> Contact Me
+                </a>
+                
+                <button onclick="switchView('gallery')" class="link-btn special-btn">
+                    <i class="fas fa-camera-retro"></i> Full Res Downloads
+                </button>
+            </main>
+
+            <footer>
+                <p>&copy; 2025 Your Brand</p>
+            </footer>
+        </div>
+
+        <div id="gallery-view" class="view-section view-hidden-right">
+            <nav class="nav-header">
+                <button onclick="switchView('home')" class="back-btn">
+                    <i class="fas fa-chevron-left"></i> Back
+                </button>
+            </nav>
+
+            <header class="profile-header">
+                <h2>Downloads</h2>
+                <p class="subtitle">Tap to download full resolution</p>
+            </header>
+
+            <div class="gallery-grid">
+                <div class="gallery-item" onclick="downloadImage('https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=1920', 'landscape.jpg')">
+                    <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=400" alt="Landscape">
+                    <div class="download-overlay">
+                        <div class="dl-icon-btn"><i class="fas fa-arrow-down"></i></div>
+                    </div>
+                </div>
+
+                <div class="gallery-item" onclick="downloadImage('https://images.unsplash.com/photo-1472214103451-9374bd1c798e?w=1920', 'nature.jpg')">
+                    <img src="https://images.unsplash.com/photo-1472214103451-9374bd1c798e?w=400" alt="Nature">
+                    <div class="download-overlay">
+                        <div class="dl-icon-btn"><i class="fas fa-arrow-down"></i></div>
+                    </div>
+                </div>
+
+                <div class="gallery-item" onclick="downloadImage('https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=1920', 'forest.jpg')">
+                    <img src="https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=400" alt="Forest">
+                    <div class="download-overlay">
+                        <div class="dl-icon-btn"><i class="fas fa-arrow-down"></i></div>
+                    </div>
+                </div>
+
+                <div class="gallery-item" onclick="downloadImage('https://images.unsplash.com/photo-1501854140884-074bf86ee91c?w=1920', 'mountain.jpg')">
+                    <img src="https://images.unsplash.com/photo-1501854140884-074bf86ee91c?w=400" alt="Mountain">
+                    <div class="download-overlay">
+                        <div class="dl-icon-btn"><i class="fas fa-arrow-down"></i></div>
+                    </div>
+                </div>
+            </div>
+            
+            <footer>
+                <p>Free for personal use.</p>
+            </footer>
+        </div>
+
+    </div>
+
+    <div id="toast">Downloading image...</div>
+
+    <script>
+        // --- VIEW SWITCHING LOGIC ---
+        function switchView(viewName) {
+            const home = document.getElementById('home-view');
+            const gallery = document.getElementById('gallery-view');
+
+            if (viewName === 'gallery') {
+                // Animate Home Out to Left
+                home.classList.remove('view-active');
+                home.classList.add('view-hidden-left');
+                
+                // Animate Gallery In from Right
+                gallery.classList.remove('view-hidden-right');
+                gallery.classList.add('view-active');
+            } else {
+                // Animate Gallery Out to Right
+                gallery.classList.remove('view-active');
+                gallery.classList.add('view-hidden-right');
+
+                // Animate Home In from Left
+                home.classList.remove('view-hidden-left');
+                home.classList.add('view-active');
+            }
+        }
+
+        // --- DOWNLOAD LOGIC ---
+        // Forces browser to download image blob rather than opening in tab
+        async function downloadImage(imageSrc, fileName) {
+            showToast("Starting download...");
+            
+            try {
+                const response = await fetch(imageSrc);
+                const blob = await response.blob();
+                
+                const url = window.URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                
+                a.style.display = 'none';
+                a.href = url;
+                a.download = fileName;
+                
+                document.body.appendChild(a);
+                a.click();
+                
+                window.URL.revokeObjectURL(url);
+                document.body.removeChild(a);
+                showToast("Download Complete!");
+            } catch (error) {
+                console.error('Download failed:', error);
+                showToast("Error. Opening in new tab.");
+                window.open(imageSrc, '_blank');
+            }
+        }
+
+        // --- TOAST NOTIFICATION ---
+        function showToast(message) {
+            const toast = document.getElementById("toast");
+            toast.innerText = message;
+            toast.className = "show";
+            setTimeout(function(){ toast.className = toast.className.replace("show", ""); }, 3000);
+        }
+    </script>
+</body>
+</html>
