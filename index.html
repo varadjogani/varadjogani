@@ -7,14 +7,21 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
-        /* --- VARIABLES & RESET --- */
+        /* --- VARIABLES & RESET - MATERIAL DESIGN 3 ANDROID 16 --- */
         :root {
-            --glass-bg: rgba(255, 255, 255, 0.7);
-            --glass-border: rgba(173, 216, 230, 0.4);
-            --glass-highlight: rgba(255, 255, 255, 0.5);
-            --text-primary: #1a1a2e;
-            --text-secondary: rgba(26, 26, 46, 0.6);
-            --accent-glow: rgba(135, 206, 250, 0.6); /* Light Blue Glow */
+            --bg-primary: #fffbfe;
+            --bg-secondary: #f7f2fa;
+            --surface: #fff8fd;
+            --surface-dim: #ede7f6;
+            --card-bg: rgba(103, 58, 183, 0.08);
+            --text-primary: #1c1b1f;
+            --text-secondary: rgba(28, 27, 31, 0.6);
+            --accent-primary: #7d5260;
+            --accent-secondary: #625b71;
+            --accent-tertiary: #7d5ba6;
+            --success: #2e7d32;
+            --warning: #f57c00;
+            --error: #d32f2f;
         }
 
         * {
@@ -25,8 +32,9 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, "Roboto", "Segoe UI", "Helvetica Neue", sans-serif;
             color: var(--text-primary);
+            background: linear-gradient(135deg, #fffbfe 0%, #f7f2fa 100%);
             min-height: 100vh;
             overflow-x: hidden;
             display: flex;
@@ -35,7 +43,7 @@
             padding: 20px;
         }
 
-        /* --- ANIMATED LIQUID BACKGROUND --- */
+        /* --- ANIMATED GRADIENT BACKGROUND --- */
         .liquid-background {
             position: fixed;
             top: 0;
@@ -43,46 +51,52 @@
             width: 100%;
             height: 100%;
             z-index: -1;
-            background: linear-gradient(-45deg, #e3f2fd, #bbdefb, #90caf9, #64b5f6);
-            background-size: 400% 400%;
-            animation: gradientBG 15s ease infinite;
+            background: linear-gradient(135deg, #fffbfe 0%, #f7f2fa 50%, #fce4ec 100%);
+            animation: none;
         }
 
-        /* Floating orbs for extra "Liquid" feel */
+        /* Floating orbs for Material Design aesthetic */
         .orb {
             position: absolute;
             border-radius: 50%;
-            filter: blur(80px);
+            filter: blur(100px);
             z-index: -1;
-            animation: floatOrb 5s infinite ease-in-out;
+            mix-blend-mode: multiply;
         }
-        .orb-1 { width: 300px; height: 300px; background: rgba(135, 206, 250, 0.3); top: 10%; left: 10%; animation-duration: 8s; }
-        .orb-2 { width: 400px; height: 400px; background: rgba(173, 216, 230, 0.2); bottom: 10%; right: 10%; animation-delay: -5s; animation-duration: 15s; }
-
-        @keyframes gradientBG {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+        .orb-1 { 
+            width: 400px; 
+            height: 400px; 
+            background: rgba(125, 82, 96, 0.15); 
+            top: -10%; 
+            left: -5%; 
+            animation: floatOrb 8s ease-in-out infinite;
+        }
+        .orb-2 { 
+            width: 500px; 
+            height: 500px; 
+            background: rgba(125, 91, 166, 0.12); 
+            bottom: -15%; 
+            right: -10%; 
+            animation: floatOrb 12s ease-in-out infinite reverse;
         }
 
         @keyframes floatOrb {
             0% { transform: translate(0, 0) scale(1); }
-            25% { transform: translate(60px, -80px) scale(1.05); }
-            50% { transform: translate(20px, 60px) scale(1.1); }
-            75% { transform: translate(-80px, 40px) scale(1.05); }
+            25% { transform: translate(40px, -40px) scale(1.05); }
+            50% { transform: translate(-30px, 50px) scale(1.1); }
+            75% { transform: translate(50px, 30px) scale(1.05); }
             100% { transform: translate(0, 0) scale(1); }
         }
 
-        /* --- MAIN GLASS CONTAINER --- */
+        /* --- MAIN CARD CONTAINER --- */
         .glass-container {
             width: 100%;
-            max-width: 600px;
-            background: var(--glass-bg);
-            backdrop-filter: blur(25px);
-            -webkit-backdrop-filter: blur(25px); /* Safari support */
-            border-radius: 30px;
-            border: 1px solid var(--glass-border);
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+            max-width: 420px;
+            background: var(--surface);
+            backdrop-filter: none;
+            border-radius: 32px;
+            border: none;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12), 0 2px 4px rgba(0, 0, 0, 0.08);
             overflow: hidden;
             position: relative;
             min-height: 80vh;
@@ -132,35 +146,46 @@
         /* --- PROFILE STYLES --- */
         .profile-header {
             text-align: center;
-            margin-bottom: 40px;
+            margin-bottom: 35px;
+            padding: 20px;
+            background: linear-gradient(135deg, rgba(125, 82, 96, 0.08) 0%, rgba(125, 91, 166, 0.08) 100%);
+            border-radius: 24px;
+            margin: 20px 20px 35px 20px;
         }
 
         .profile-pic {
-            width: 110px;
-            height: 110px;
-            border-radius: 50%;
+            width: 230px;
+            height: 230px;
+            border-radius: 24px;
             object-fit: cover;
-            border: 3px solid rgba(135, 206, 250, 0.6);
-            margin-bottom: 15px;
-            box-shadow: 0 10px 20px rgba(135, 206, 250, 0.2);
-            transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+            border: none;
+            margin-bottom: 20px;
+            margin-left: auto;
+            margin-right: auto;
+            display: block;
+            box-shadow: 0 12px 28px rgba(125, 82, 96, 0.2), 0 2px 4px rgba(125, 82, 96, 0.12);
+            transition: all 0.3s cubic-bezier(0.2, 0, 0.13, 1);
+            cursor: pointer;
         }
 
         .profile-pic:hover {
-            transform: scale(1.1) rotateZ(5deg);
-            box-shadow: 0 20px 40px rgba(135, 206, 250, 0.4), 0 0 30px rgba(135, 206, 250, 0.3);
-            border-color: rgba(135, 206, 250, 0.8);
+            transform: scale(1.05);
+            box-shadow: 0 16px 36px rgba(125, 82, 96, 0.25), 0 4px 6px rgba(125, 82, 96, 0.15);
         }
 
-        @keyframes profileBreathe {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.02); }
+        h1 {
+            font-weight: 700;
+            font-size: 2.2rem;
+            letter-spacing: -0.5px;
+            margin-bottom: 8px;
+            color: var(--text-primary);
         }
 
         .subtitle {
             color: var(--text-secondary);
-            font-size: 0.95rem;
+            font-size: 1rem;
             font-weight: 500;
+            letter-spacing: 0.3px;
         }
 
         /* --- BUTTONS (LINKS) --- */
@@ -169,46 +194,55 @@
             align-items: center;
             justify-content: center;
             width: 100%;
-            padding: 18px;
-            margin-bottom: 15px;
-            background: rgba(173, 216, 230, 0.3);
-            border: 1px solid rgba(135, 206, 250, 0.5);
-            border-radius: 18px;
-            color: #1a1a2e;
+            padding: 16px;
+            margin-bottom: 12px;
+            background: var(--card-bg);
+            border: none;
+            border-radius: 12px;
+            color: var(--text-primary);
             text-decoration: none;
             font-weight: 600;
             font-size: 1rem;
-            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            transition: all 0.2s cubic-bezier(0.2, 0, 0.13, 1);
             position: relative;
             overflow: hidden;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
         }
 
         .link-btn i {
-            margin-right: 12px;
-            font-size: 1.2rem;
+            margin-right: 10px;
+            font-size: 1.1rem;
+            transition: all 0.2s ease;
         }
 
         .link-btn:hover {
-            background: rgba(135, 206, 250, 0.4);
-            transform: translateY(-3px) scale(1.03);
-            box-shadow: 0 10px 30px rgba(135, 206, 250, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.5);
-            border-color: rgba(135, 206, 250, 0.8);
+            background: rgba(125, 82, 96, 0.15);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(125, 82, 96, 0.15);
         }
 
         .link-btn:active {
-            transform: translateY(-1px) scale(1.01);
+            transform: translateY(0);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.06);
         }
 
         .special-btn {
-            background: rgba(135, 206, 250, 0.2);
-            border: 1px solid rgba(135, 206, 250, 0.6);
+            background: linear-gradient(135deg, rgba(125, 82, 96, 0.15) 0%, rgba(125, 91, 166, 0.15) 100%);
         }
 
-        /* --- GALLERY STYLES --- */
+        .special-btn:hover {
+            background: linear-gradient(135deg, rgba(125, 82, 96, 0.25) 0%, rgba(125, 91, 166, 0.25) 100%);
+        }
+
+        /* --- LINKS LIST --- */
+        .links-list {
+            padding: 0 20px 20px 20px;
+        }
         .nav-header {
             display: flex;
             align-items: center;
-            margin-bottom: 30px;
+            margin-bottom: 25px;
+            padding: 0 20px;
         }
 
         .back-btn {
@@ -219,45 +253,60 @@
             cursor: pointer;
             display: flex;
             align-items: center;
-            transition: color 0.3s;
+            transition: all 0.3s ease;
+            padding: 8px 12px;
+            border-radius: 10px;
         }
-        .back-btn:hover { color: white; }
+        
+        .back-btn:hover { 
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--text-primary);
+        }
+        
         .back-btn i { margin-right: 8px; }
 
         .gallery-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 15px;
-            padding-bottom: 20px;
+            gap: 12px;
+            padding: 0 20px 20px 20px;
         }
 
         .gallery-item {
             position: relative;
-            border-radius: 20px;
+            border-radius: 18px;
             overflow: hidden;
             aspect-ratio: 1/1;
-            background: rgba(173, 216, 230, 0.2);
-            border: 1px solid rgba(135, 206, 250, 0.4);
+            background: var(--card-bg);
+            border: 1px solid rgba(255, 255, 255, 0.1);
             cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(20px);
         }
 
         .gallery-item img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: transform 0.5s ease;
+            transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .gallery-item:hover {
+            background: var(--card-bg-hover);
+            border-color: rgba(255, 255, 255, 0.2);
+            transform: scale(1.02);
         }
 
         .gallery-item:hover img {
-            transform: scale(1.1);
+            transform: scale(1.15);
         }
 
         /* Download Icon Overlay */
         .download-overlay {
             position: absolute;
             inset: 0;
-            background: rgba(26, 26, 46, 0.3);
-            backdrop-filter: blur(4px);
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(5px);
             display: flex;
             justify-content: center;
             align-items: center;
@@ -272,7 +321,7 @@
         /* For mobile, show a small icon in corner always */
         @media (max-width: 600px) {
             .download-overlay {
-                background: linear-gradient(to top, rgba(26, 26, 46, 0.5), transparent);
+                background: linear-gradient(to top, rgba(0, 0, 0, 0.4), transparent);
                 align-items: flex-end;
                 padding-bottom: 15px;
                 opacity: 1;
@@ -280,56 +329,131 @@
         }
 
         .dl-icon-btn {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background: rgba(255,255,255,0.5);
-            border: 1px solid rgba(135, 206, 250, 0.6);
-            color: #1a1a2e;
+            width: 48px;
+            height: 48px;
+            border-radius: 14px;
+            background: rgba(0, 199, 255, 0.2);
+            border: 1px solid rgba(0, 199, 255, 0.4);
+            color: var(--text-primary);
             display: flex;
             justify-content: center;
             align-items: center;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             cursor: pointer;
             backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
         }
         
         .dl-icon-btn:hover {
-            background: rgba(135, 206, 250, 0.3);
-            color: #1a1a2e;
+            background: rgba(0, 199, 255, 0.4);
+            border-color: rgba(0, 199, 255, 0.6);
+            transform: scale(1.1);
         }
 
         footer {
             text-align: center;
-            margin-top: 30px;
+            margin-top: 20px;
             color: var(--text-secondary);
-            font-size: 0.8rem;
+            font-size: 0.85rem;
+            padding: 0 20px;
         }
 
         /* Toast Notification */
         #toast {
             visibility: hidden;
-            min-width: 250px;
-            background-color: rgba(135, 206, 250, 0.2);
-            backdrop-filter: blur(10px);
-            color: #1a1a2e;
+            min-width: 280px;
+            background-color: #323233;
+            color: #ffffff;
             text-align: center;
-            border-radius: 50px;
-            padding: 16px;
+            border-radius: 12px;
+            padding: 16px 24px;
             position: fixed;
             z-index: 100;
             left: 50%;
             bottom: 30px;
             transform: translateX(-50%);
-            border: 1px solid rgba(135, 206, 250, 0.4);
-            font-size: 0.9rem;
+            border: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+            letter-spacing: 0.2px;
             opacity: 0;
-            transition: opacity 0.3s, bottom 0.3s;
+            transition: opacity 0.3s ease;
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
         }
+        
         #toast.show {
             visibility: visible;
             opacity: 1;
-            bottom: 50px;
+        }
+
+        /* --- MODAL STYLES --- */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .modal.show {
+            display: flex;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .modal-content {
+            position: relative;
+            max-width: 90%;
+            max-height: 85vh;
+            animation: scaleIn 0.35s cubic-bezier(0.2, 0, 0.13, 1);
+        }
+
+        .modal-content img {
+            width: 100%;
+            height: auto;
+            border-radius: 25px;
+            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.25);
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: rgba(0, 0, 0, 0.5);
+            border: none;
+            color: white;
+            font-size: 1.4rem;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: all 0.2s cubic-bezier(0.2, 0, 0.13, 1);
+            font-weight: 300;
+            line-height: 1;
+        }
+
+        .close-btn:hover {
+            background: rgba(0, 0, 0, 0.7);
+            transform: scale(1.1);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes scaleIn {
+            from { transform: scale(0.85); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
         }
 
     </style>
@@ -344,7 +468,7 @@
         
         <div id="home-view" class="view-section view-active">
             <header class="profile-header">
-                <img src="IMG20241107125710.jpg" class="profile-pic">
+                <img src="IMG20241107125710.jpg" class="profile-pic" style="cursor: pointer;" onclick="openImageModal('IMG20241107125710.jpg')">
                 <h1>Varad Jogani</h1>
                 <p class="subtitle">Digital Artist & Photographer</p>
             </header>
@@ -422,6 +546,13 @@
 
     </div>
 
+    <div id="imageModal" class="modal">
+        <div class="modal-content">
+            <button class="close-btn" onclick="closeImageModal()">&times;</button>
+            <img id="modalImage" src="" alt="Profile Picture">
+        </div>
+    </div>
+
     <div id="toast">Downloading image...</div>
 
     <script>
@@ -485,6 +616,27 @@
             toast.className = "show";
             setTimeout(function(){ toast.className = toast.className.replace("show", ""); }, 3000);
         }
+
+        // --- IMAGE MODAL LOGIC ---
+        function openImageModal(imageSrc) {
+            const modal = document.getElementById("imageModal");
+            const modalImage = document.getElementById("modalImage");
+            modalImage.src = imageSrc;
+            modal.classList.add("show");
+        }
+
+        function closeImageModal() {
+            const modal = document.getElementById("imageModal");
+            modal.classList.remove("show");
+        }
+
+        // Close modal when clicking outside the image
+        document.addEventListener('click', function(event) {
+            const modal = document.getElementById("imageModal");
+            if (event.target === modal) {
+                closeImageModal();
+            }
+        });
     </script>
 </body>
 </html>
