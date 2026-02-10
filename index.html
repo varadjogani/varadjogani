@@ -3,25 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Portfolio</title>
+    <title>Varad Jogani - Portfolio</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
-        /* --- VARIABLES & RESET - MATERIAL DESIGN 3 ANDROID 16 --- */
+        /* --- MODERN MINIMALIST GEN Z DESIGN --- */
         :root {
-            --bg-primary: #fffbfe;
-            --bg-secondary: #f7f2fa;
-            --surface: #fff8fd;
-            --surface-dim: #ede7f6;
-            --card-bg: rgba(103, 58, 183, 0.08);
-            --text-primary: #1c1b1f;
-            --text-secondary: rgba(28, 27, 31, 0.6);
-            --accent-primary: #7d5260;
-            --accent-secondary: #625b71;
-            --accent-tertiary: #7d5ba6;
-            --success: #2e7d32;
-            --warning: #f57c00;
-            --error: #d32f2f;
+            --bg-primary: #0a0a0a;
+            --bg-secondary: #1a1a1a;
+            --glass-bg: transparent;
+            --glass-border: #2d2d2d;
+            --text-primary: #ffffff;
+            --text-secondary: #a0a0a0;
+            --accent-primary: #ffffff;
+            --accent-secondary: #666666;
+            --accent-tertiary: #333333;
         }
 
         * {
@@ -32,18 +28,27 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Roboto", "Segoe UI", "Helvetica Neue", sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', sans-serif;
             color: var(--text-primary);
-            background: linear-gradient(135deg, #fffbfe 0%, #f7f2fa 100%);
+            background: linear-gradient(-45deg, #1a0033, #330033, #001a4d, #0a0a0a);
+            background-size: 400% 400%;
             min-height: 100vh;
             overflow-x: hidden;
             display: flex;
             justify-content: center;
             align-items: center;
             padding: 20px;
+            position: relative;
+            animation: gradientShift 15s ease infinite;
         }
 
-        /* --- ANIMATED GRADIENT BACKGROUND --- */
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* --- BACKGROUND --- */
         .liquid-background {
             position: fixed;
             top: 0;
@@ -51,55 +56,90 @@
             width: 100%;
             height: 100%;
             z-index: -1;
-            background: linear-gradient(135deg, #fffbfe 0%, #f7f2fa 50%, #fce4ec 100%);
-            animation: none;
+            background: linear-gradient(-45deg, #1a0033, #330033, #001a4d, #0a0a0a);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
         }
 
-        /* Floating orbs for Material Design aesthetic */
+        /* Gradient blobs */
+        .liquid-background::before {
+            content: '';
+            position: absolute;
+            width: 1200px;
+            height: 1200px;
+            background: radial-gradient(circle, rgba(138, 43, 226, 0.4) 0%, rgba(75, 0, 130, 0.2) 50%, transparent 100%);
+            border-radius: 50%;
+            top: -40%;
+            left: -30%;
+            animation: float1 30s ease-in-out infinite;
+            filter: blur(80px);
+        }
+
+        .liquid-background::after {
+            content: '';
+            position: absolute;
+            width: 1100px;
+            height: 1100px;
+            background: radial-gradient(circle, rgba(30, 144, 255, 0.35) 0%, rgba(0, 0, 139, 0.2) 50%, transparent 100%);
+            border-radius: 50%;
+            bottom: -35%;
+            right: -25%;
+            animation: float2 35s ease-in-out infinite;
+            filter: blur(100px);
+        }
+
+        /* Subtle background elements */
         .orb {
             position: absolute;
             border-radius: 50%;
-            filter: blur(100px);
+            filter: blur(180px);
             z-index: -1;
-            mix-blend-mode: multiply;
+            mix-blend-mode: screen;
+            opacity: 0.5;
         }
+        
         .orb-1 { 
-            width: 400px; 
-            height: 400px; 
-            background: rgba(125, 82, 96, 0.15); 
-            top: -10%; 
-            left: -5%; 
-            animation: floatOrb 8s ease-in-out infinite;
+            width: 800px; 
+            height: 800px; 
+            background: radial-gradient(circle, rgba(186, 85, 211, 0.5) 0%, rgba(138, 43, 226, 0.3) 50%, transparent 100%);
+            top: -5%; 
+            left: -25%; 
+            animation: float1 25s ease-in-out infinite;
         }
+        
         .orb-2 { 
-            width: 500px; 
-            height: 500px; 
-            background: rgba(125, 91, 166, 0.12); 
-            bottom: -15%; 
-            right: -10%; 
-            animation: floatOrb 12s ease-in-out infinite reverse;
+            width: 900px; 
+            height: 900px; 
+            background: radial-gradient(circle, rgba(65, 105, 225, 0.4) 0%, rgba(30, 144, 255, 0.25) 50%, transparent 100%);
+            bottom: -30%; 
+            right: -20%; 
+            animation: float2 30s ease-in-out infinite;
         }
 
-        @keyframes floatOrb {
-            0% { transform: translate(0, 0) scale(1); }
-            25% { transform: translate(40px, -40px) scale(1.05); }
-            50% { transform: translate(-30px, 50px) scale(1.1); }
-            75% { transform: translate(50px, 30px) scale(1.05); }
-            100% { transform: translate(0, 0) scale(1); }
+        @keyframes float1 {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(100px, -100px); }
+        }
+
+        @keyframes float2 {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(-100px, 100px); }
         }
 
         /* --- MAIN CARD CONTAINER --- */
         .glass-container {
             width: 100%;
-            max-width: 420px;
-            background: var(--surface);
+            max-width: 600px;
+            background: #111111;
             backdrop-filter: none;
-            border-radius: 32px;
+            -webkit-backdrop-filter: none;
+            border-radius: 0px;
             border: none;
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12), 0 2px 4px rgba(0, 0, 0, 0.08);
+            border-bottom: 1px solid #2d2d2d;
+            box-shadow: none;
             overflow: hidden;
             position: relative;
-            min-height: 80vh;
+            min-height: auto;
             display: flex;
             flex-direction: column;
         }
@@ -107,14 +147,15 @@
         @media (max-width: 600px) {
             .glass-container {
                 max-width: 100%;
-                border-radius: 24px;
-                min-height: 90vh;
+                border-radius: 0px;
+                min-height: auto;
+                border-bottom: 1px solid #2d2d2d;
             }
         }
 
         /* --- VIEWS (HOME & DOWNLOADS) --- */
         .view-section {
-            padding: 40px 30px;
+            padding: 80px 60px;
             width: 100%;
             transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.5s ease;
             position: absolute;
@@ -122,17 +163,17 @@
             left: 0;
             height: 100%;
             overflow-y: auto;
-            /* Hide scrollbar */
             scrollbar-width: none; 
             -ms-overflow-style: none;
         }
 
+        .view-section::-webkit-scrollbar { display: none; }
+
         @media (max-width: 600px) {
             .view-section {
-                padding: 20px 15px;
+                padding: 50px 30px;
             }
         }
-        .view-section::-webkit-scrollbar { display: none; }
 
         /* Animation States */
         .view-active {
@@ -140,8 +181,9 @@
             opacity: 1;
             z-index: 2;
             pointer-events: all;
-            position: relative; /* Make it flow normally */
+            position: relative;
         }
+
         .view-hidden-left {
             transform: translateX(-50px);
             opacity: 0;
@@ -149,6 +191,7 @@
             pointer-events: none;
             position: absolute;
         }
+
         .view-hidden-right {
             transform: translateX(50px);
             opacity: 0;
@@ -160,158 +203,241 @@
         /* --- PROFILE STYLES --- */
         .profile-header {
             text-align: center;
-            padding: 20px;
-            background: linear-gradient(135deg, rgba(125, 82, 96, 0.08) 0%, rgba(125, 91, 166, 0.08) 100%);
-            border-radius: 24px;
-            margin: 20px 20px 35px 20px;
-        }
-
-        @media (max-width: 600px) {
-            .profile-header {
-                background: rgba(125, 82, 96, 0.06);
-                margin: 15px 15px 30px 15px;
-                padding: 15px;
-            }
+            padding: 0;
+            margin-bottom: 30px;
         }
 
         .profile-pic {
-            width: 230px;
-            height: 230px;
-            border-radius: 24px;
+            width: 300px;
+            height: 300px;
+            border-radius: 0px;
             object-fit: cover;
             border: none;
-            margin-bottom: 20px;
+            margin-bottom: 40px;
             margin-left: auto;
             margin-right: auto;
             display: block;
-            box-shadow: 0 12px 28px rgba(125, 82, 96, 0.2), 0 2px 4px rgba(125, 82, 96, 0.12);
-            transition: all 0.3s cubic-bezier(0.2, 0, 0.13, 1);
+            box-shadow: none;
+            transition: all 0.3s ease;
             cursor: pointer;
+            opacity: 1;
         }
 
         .profile-pic:hover {
-            transform: scale(1.05);
-            box-shadow: 0 16px 36px rgba(125, 82, 96, 0.25), 0 4px 6px rgba(125, 82, 96, 0.15);
+            transform: scale(1.02);
+            box-shadow: none;
+            border-color: var(--accent-primary);
+            opacity: 0.9;
         }
 
         @media (max-width: 600px) {
             .profile-pic {
-                width: 160px;
-                height: 160px;
-                margin-bottom: 15px;
+                width: 200px;
+                height: 200px;
+                margin-bottom: 30px;
             }
         }
 
         h1 {
-            font-weight: 700;
-            font-size: 2.2rem;
+            font-weight: 600;
+            font-size: 3.2rem;
             letter-spacing: -0.5px;
             margin-bottom: 8px;
+            background: none;
+            -webkit-background-clip: unset;
+            -webkit-text-fill-color: unset;
+            background-clip: unset;
             color: var(--text-primary);
+            animation: none;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { filter: hue-rotate(0deg); }
+            50% { filter: hue-rotate(10deg); }
         }
 
         @media (max-width: 600px) {
             h1 {
-                font-size: 1.8rem;
+                font-size: 2.2rem;
                 margin-bottom: 6px;
             }
         }
 
         .subtitle {
             color: var(--text-secondary);
-            font-size: 1rem;
-            font-weight: 500;
-            letter-spacing: 0.3px;
+            font-size: 0.95rem;
+            font-weight: 400;
+            letter-spacing: 0px;
+            text-transform: none;
         }
 
-        /* --- BUTTONS (LINKS) --- */
-        .link-btn {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 100%;
-            padding: 16px;
-            margin-bottom: 12px;
-            background: var(--card-bg);
+        /* --- BLOG SECTION --- */
+        .bio-blog {
+            background: transparent;
+            backdrop-filter: none;
+            padding: 40px 0;
+            border-radius: 0px;
+            margin: 40px 0;
             border: none;
-            border-radius: 12px;
-            color: var(--text-primary);
-            text-decoration: none;
+            border-top: 1px solid #2d2d2d;
+            border-bottom: 1px solid #2d2d2d;
+            box-shadow: none;
+        }
+
+        .bio-blog h2 {
+            font-size: 1.5rem;
             font-weight: 600;
+            margin-bottom: 20px;
+            background: none;
+            -webkit-background-clip: unset;
+            -webkit-text-fill-color: unset;
+            background-clip: unset;
+            color: var(--text-primary);
+        }
+
+        .bio-blog p {
+            font-size: 1.05rem;
+            line-height: 1.7;
+            color: var(--text-secondary);
+            margin-bottom: 16px;
+        }
+
+        .bio-blog .highlight {
+            color: var(--text-primary);
+            font-weight: 600;
+            text-shadow: none;
+        }
+
+        .age-badge {
+            display: inline-block;
+            background: transparent;
+            color: var(--text-primary);
+            padding: 0px;
+            border-radius: 0px;
             font-size: 1rem;
-            transition: all 0.2s cubic-bezier(0.2, 0, 0.13, 1);
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+            font-weight: 600;
+            margin-left: 4px;
+            box-shadow: none;
+            border-bottom: 1px solid var(--text-primary);
         }
 
         @media (max-width: 600px) {
-            .link-btn {
-                padding: 14px 12px;
-                margin-bottom: 10px;
-                border-radius: 10px;
-                font-size: 0.95rem;
+            .bio-blog {
+                padding: 30px 0;
+                margin: 30px 0;
+                border-radius: 0px;
+            }
+
+            .bio-blog h2 {
+                font-size: 1.3rem;
+                margin-bottom: 15px;
+            }
+
+            .bio-blog p {
+                font-size: 1rem;
+                margin-bottom: 12px;
             }
         }
 
+        /* --- BUTTONS (LINKS) --- */
+        .links-list {
+            padding: 0;
+        }
+
+        .link-btn {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            width: 100%;
+            padding: 16px 0;
+            margin-bottom: 0px;
+            background: transparent;
+            border: none;
+            border-bottom: 1px solid #2d2d2d;
+            border-radius: 0px;
+            color: var(--text-primary);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1rem;
+            transition: all 0.2s ease;
+            position: relative;
+            overflow: visible;
+            backdrop-filter: none;
+        }
+
+        .link-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: none;
+            transition: none;
+            z-index: -1;
+        }
+
+        .link-btn:hover::before {
+            left: 100%;
+        }
+
         .link-btn i {
-            margin-right: 10px;
-            font-size: 1.1rem;
+            margin-right: 12px;
+            font-size: 1rem;
             transition: all 0.2s ease;
         }
 
         .link-btn:hover {
-            background: rgba(125, 82, 96, 0.15);
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(125, 82, 96, 0.15);
+            background: transparent;
+            border-color: var(--text-primary);
+            transform: none;
+            box-shadow: none;
+        }
+
+        .link-btn:hover i {
+            transform: translateX(4px);
         }
 
         .link-btn:active {
-            transform: translateY(0);
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.06);
+            transform: none;
         }
 
         .special-btn {
-            background: linear-gradient(135deg, rgba(125, 82, 96, 0.15) 0%, rgba(125, 91, 166, 0.15) 100%);
+            background: transparent;
+            border-bottom: 2px solid var(--text-primary);
+            font-weight: 600;
         }
 
         .special-btn:hover {
-            background: linear-gradient(135deg, rgba(125, 82, 96, 0.25) 0%, rgba(125, 91, 166, 0.25) 100%);
+            background: transparent;
+            border-bottom: 2px solid var(--text-primary);
         }
-
-        /* --- LINKS LIST --- */
-        .links-list {
-            padding: 0 20px 20px 20px;
-        }
-
-        @media (max-width: 600px) {
-            .links-list {
-                padding: 0 0 15px 0;
-            }
-        }
+        /* --- GALLERY STYLES --- */
         .nav-header {
             display: flex;
             align-items: center;
-            margin-bottom: 25px;
-            padding: 0 20px;
+            margin-bottom: 30px;
+            border-bottom: 1px solid #2d2d2d;
+            padding-bottom: 28px;
         }
 
         .back-btn {
-            background: none;
+            background: transparent;
             border: none;
-            color: var(--text-secondary);
-            font-size: 1.1rem;
+            color: var(--text-primary);
+            font-size: 1rem;
             cursor: pointer;
             display: flex;
             align-items: center;
-            transition: all 0.3s ease;
-            padding: 8px 12px;
-            border-radius: 10px;
+            transition: all 0.2s ease;
+            padding: 0px;
+            border-radius: 0px;
         }
         
         .back-btn:hover { 
-            background: rgba(255, 255, 255, 0.1);
-            color: var(--text-primary);
+            background: transparent;
+            transform: translateX(-3px);
+            color: var(--text-secondary);
         }
         
         .back-btn i { margin-right: 8px; }
@@ -319,45 +445,46 @@
         .gallery-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 12px;
-            padding: 0 20px 20px 20px;
+            gap: 24px;
+            padding-bottom: 20px;
         }
 
         .gallery-item {
             position: relative;
-            border-radius: 18px;
+            border-radius: 0px;
             overflow: hidden;
             aspect-ratio: 1/1;
-            background: var(--card-bg);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: #1a1a1a;
+            border: none;
             cursor: pointer;
             transition: all 0.3s ease;
-            backdrop-filter: blur(20px);
+            box-shadow: none;
         }
 
         .gallery-item img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            transition: transform 0.3s ease, opacity 0.3s ease;
         }
 
         .gallery-item:hover {
-            background: var(--card-bg-hover);
-            border-color: rgba(255, 255, 255, 0.2);
-            transform: scale(1.02);
+            background: #1a1a1a;
+            border-color: transparent;
+            box-shadow: none;
+            transform: none;
         }
 
         .gallery-item:hover img {
-            transform: scale(1.15);
+            transform: scale(1.05);
+            opacity: 0.8;
         }
 
-        /* Download Icon Overlay */
         .download-overlay {
             position: absolute;
             inset: 0;
-            background: rgba(0, 0, 0, 0.3);
-            backdrop-filter: blur(5px);
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: none;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -369,12 +496,11 @@
             opacity: 1;
         }
 
-        /* For mobile, show a small icon in corner always */
         @media (max-width: 600px) {
             .download-overlay {
-                background: linear-gradient(to top, rgba(0, 0, 0, 0.4), transparent);
-                align-items: flex-end;
-                padding-bottom: 15px;
+                background: rgba(0, 0, 0, 0.5);
+                align-items: center;
+                padding-bottom: 0px;
                 opacity: 1;
             }
         }
@@ -382,54 +508,58 @@
         .dl-icon-btn {
             width: 48px;
             height: 48px;
-            border-radius: 14px;
-            background: rgba(0, 199, 255, 0.2);
-            border: 1px solid rgba(0, 199, 255, 0.4);
-            color: var(--text-primary);
+            border-radius: 0px;
+            background: rgba(255, 255, 255, 0.15);
+            border: none;
+            color: #ffffff;
             display: flex;
             justify-content: center;
             align-items: center;
-            font-size: 1.1rem;
+            font-size: 1.2rem;
             cursor: pointer;
-            backdrop-filter: blur(10px);
-            transition: all 0.3s ease;
+            transition: all 0.2s ease;
+            box-shadow: none;
         }
         
         .dl-icon-btn:hover {
-            background: rgba(0, 199, 255, 0.4);
-            border-color: rgba(0, 199, 255, 0.6);
+            background: rgba(255, 255, 255, 0.25);
+            border-color: transparent;
             transform: scale(1.1);
+            box-shadow: none;
         }
 
         footer {
             text-align: center;
-            margin-top: 20px;
+            margin-top: 40px;
+            padding-top: 40px;
             color: var(--text-secondary);
             font-size: 0.85rem;
-            padding: 0 20px;
+            letter-spacing: 0px;
+            border-top: 1px solid #2d2d2d;
         }
 
         /* Toast Notification */
         #toast {
             visibility: hidden;
             min-width: 280px;
-            background-color: #323233;
+            background: #2d2d2d;
+            backdrop-filter: none;
             color: #ffffff;
             text-align: center;
-            border-radius: 12px;
-            padding: 16px 24px;
+            border-radius: 0px;
+            padding: 14px 24px;
             position: fixed;
             z-index: 100;
             left: 50%;
             bottom: 30px;
             transform: translateX(-50%);
             border: none;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             font-weight: 500;
-            letter-spacing: 0.2px;
+            letter-spacing: 0px;
             opacity: 0;
-            transition: opacity 0.3s ease;
-            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            box-shadow: none;
         }
         
         #toast.show {
@@ -445,8 +575,8 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.3);
-            backdrop-filter: blur(5px);
+            background: rgba(0, 0, 0, 0.9);
+            backdrop-filter: none;
             z-index: 1000;
             justify-content: center;
             align-items: center;
@@ -462,39 +592,43 @@
             position: relative;
             max-width: 90%;
             max-height: 85vh;
-            animation: scaleIn 0.35s cubic-bezier(0.2, 0, 0.13, 1);
+            animation: scaleIn 0.3s ease;
         }
 
         .modal-content img {
             width: 100%;
             height: auto;
-            border-radius: 25px;
-            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.25);
+            border-radius: 0px;
+            border: none;
+            box-shadow: none;
         }
 
         .close-btn {
             position: absolute;
-            top: 15px;
-            right: 15px;
-            background: rgba(0, 0, 0, 0.5);
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: none;
             border: none;
-            color: white;
-            font-size: 1.4rem;
+            color: #ffffff;
+            font-size: 1.5rem;
             width: 44px;
             height: 44px;
-            border-radius: 50%;
+            border-radius: 0px;
             cursor: pointer;
             display: flex;
             justify-content: center;
             align-items: center;
-            transition: all 0.2s cubic-bezier(0.2, 0, 0.13, 1);
+            transition: all 0.2s ease;
             font-weight: 300;
             line-height: 1;
+            box-shadow: none;
         }
 
         .close-btn:hover {
-            background: rgba(0, 0, 0, 0.7);
-            transform: scale(1.1);
+            background: rgba(255, 255, 255, 0.3);
+            transform: none;
+            box-shadow: none;
         }
 
         @keyframes fadeIn {
@@ -503,7 +637,7 @@
         }
 
         @keyframes scaleIn {
-            from { transform: scale(0.85); opacity: 0; }
+            from { transform: scale(0.9); opacity: 0; }
             to { transform: scale(1); opacity: 1; }
         }
 
@@ -523,6 +657,19 @@
                 <h1>Varad Jogani</h1>
                 <p class="subtitle">Digital Artist & Photographer</p>
             </header>
+
+            <section class="bio-blog">
+                <h2>About Me</h2>
+                <p>
+                    Hey there! I'm <span class="highlight">Varad</span>, a <span class="age-badge"><span id="current-age">21</span></span> year old who's passionate about <span class="highlight">pharmacy</span> and loves doing some casual <span class="highlight">coding</span> on the side. 
+                </p>
+                <p>
+                    I enjoy exploring creative projects, whether it's photography, digital art, or building cool things with code. When I'm not studying pharmacy, you'll find me experimenting with new technologies and design trends.
+                </p>
+                <p>
+                    Feel free to reach out and connect with me! I'd love to collaborate or just chat about tech, design, or anything interesting. 🎨
+                </p>
+            </section>
 
             <main class="links-list">
                 <a href="https://instagram.com/varad_jogani" target="_blank" class="link-btn">
@@ -607,6 +754,38 @@
     <div id="toast">Downloading image...</div>
 
     <script>
+        // --- AGE CALCULATION FOR BIRTHDAY (25th December) ---
+        function updateAge() {
+            const today = new Date();
+            const birthMonth = 11; // December (0-indexed)
+            const birthDay = 25;
+            const birthYear = 2004; // Born on Dec 25, 2004 (will be 21 in 2025)
+
+            let age = today.getFullYear() - birthYear;
+
+            // Check if birthday has occurred this year
+            if (today.getMonth() < birthMonth || (today.getMonth() === birthMonth && today.getDate() < birthDay)) {
+                age--;
+            }
+
+            document.getElementById('current-age').textContent = age;
+        }
+
+        // Update age on page load and every day at midnight
+        updateAge();
+        
+        // Set timer to update age daily at midnight
+        const now = new Date();
+        const tomorrow = new Date(now);
+        tomorrow.setDate(tomorrow.getDate() + 1);
+        tomorrow.setHours(0, 0, 0, 0);
+        
+        const timeUntilMidnight = tomorrow - now;
+        setTimeout(() => {
+            updateAge();
+            setInterval(updateAge, 24 * 60 * 60 * 1000);
+        }, timeUntilMidnight);
+
         // --- VIEW SWITCHING LOGIC ---
         function switchView(viewName) {
             const home = document.getElementById('home-view');
