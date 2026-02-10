@@ -54,10 +54,11 @@
             border-radius: 50%;
             filter: blur(80px);
             z-index: -1;
-            animation: floatOrb 10s infinite ease-in-out;
+            animation: floatOrb 5s infinite ease-in-out;   /* Faster: 5 seconds */
+            //animation: floatOrb 20s infinite ease-in-out;  /* Slower: 20 seconds */
         }
-        .orb-1 { width: 300px; height: 300px; background: #6600ff; top: 10%; left: 10%; }
-        .orb-2 { width: 400px; height: 400px; background: #00ccff; bottom: 10%; right: 10%; animation-delay: -5s; }
+        .orb-1 { width: 300px; height: 300px; background: #6600ff; top: 10%; left: 10%; animation-duration: 8s; }
+        .orb-2 { width: 400px; height: 400px; background: #00ccff; bottom: 10%; right: 10%; animation-delay: -5s; animation-duration: 15s; }
 
         @keyframes gradientBG {
             0% { background-position: 0% 50%; }
@@ -66,8 +67,11 @@
         }
 
         @keyframes floatOrb {
-            0%, 100% { transform: translate(0, 0); }
-            50% { transform: translate(30px, -50px); }
+            0% { transform: translate(0, 0) scale(1); }
+            25% { transform: translate(60px, -80px) scale(1.05); }
+            50% { transform: translate(20px, 60px) scale(1.1); }
+            75% { transform: translate(-80px, 40px) scale(1.05); }
+            100% { transform: translate(0, 0) scale(1); }
         }
 
         /* --- MAIN GLASS CONTAINER --- */
@@ -137,9 +141,22 @@
             height: 200px;
             border-radius: 50%;
             object-fit: cover;
-            border: 2px solid rgba(255, 255, 255, 0.4);
+            border: 3px solid rgba(255, 255, 255, 0.4);
             margin-bottom: 15px;
             box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+            animation: profileBreathe 3s ease-in-out infinite;
+        }
+
+        .profile-pic:hover {
+            transform: scale(1.1) rotateZ(5deg);
+            box-shadow: 0 20px 40px rgba(0, 122, 255, 0.4), 0 0 30px rgba(0, 122, 255, 0.3);
+            border-color: rgba(0, 122, 255, 0.8);
+        }
+
+        @keyframes profileBreathe {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.02); }
         }
 
         h1 {
@@ -147,6 +164,12 @@
             letter-spacing: -0.5px;
             margin-bottom: 5px;
             text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+            animation: titleGlow 3s ease-in-out infinite;
+        }
+
+        @keyframes titleGlow {
+            0%, 100% { text-shadow: 0 2px 10px rgba(0,0,0,0.3); }
+            50% { text-shadow: 0 0 20px rgba(0, 122, 255, 0.4), 0 2px 10px rgba(0,0,0,0.3); }
         }
 
         .subtitle {
@@ -181,10 +204,14 @@
         }
 
         .link-btn:hover {
-            background: rgba(255, 255, 255, 0.15);
-            transform: scale(1.02);
-            box-shadow: 0 0 20px var(--accent-glow);
-            border-color: rgba(255, 255, 255, 0.5);
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-3px) scale(1.03);
+            box-shadow: 0 10px 30px var(--accent-glow), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            border-color: rgba(255, 255, 255, 0.6);
+        }
+
+        .link-btn:active {
+            transform: translateY(-1px) scale(1.01);
         }
 
         .special-btn {
