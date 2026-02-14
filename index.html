@@ -41,7 +41,6 @@
             display: none;
         }
 
-        /* Gradient blobs */
         .liquid-background::before {
             display: none;
         }
@@ -50,7 +49,6 @@
             display: none;
         }
 
-        /* Subtle background elements */
         .orb {
             display: none;
         }
@@ -98,7 +96,7 @@
             }
         }
 
-        /* --- VIEWS (HOME & DOWNLOADS) --- */
+        /* --- VIEWS --- */
         .view-section {
             padding: 60px 40px;
             width: 100%;
@@ -334,130 +332,6 @@
             transform: none;
         }
 
-        .special-btn {
-            background: transparent;
-            border-bottom: 1px solid var(--border-color);
-            font-weight: 500;
-        }
-
-        .special-btn:hover {
-            background: transparent;
-        }
-        /* --- GALLERY STYLES --- */
-        .nav-header {
-            display: flex;
-            align-items: center;
-            margin-bottom: 30px;
-            border-bottom: 1px solid var(--border-color);
-            padding-bottom: 20px;
-        }
-
-        .back-btn {
-            background: transparent;
-            border: none;
-            color: var(--text-primary);
-            font-size: 1rem;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            transition: all 0.2s ease;
-            padding: 0px;
-            border-radius: 0px;
-        }
-        
-        .back-btn:hover { 
-            background: transparent;
-            transform: translateX(-3px);
-            color: var(--text-secondary);
-        }
-        
-        .back-btn i { margin-right: 8px; }
-
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-            padding-bottom: 20px;
-        }
-
-        .gallery-item {
-            position: relative;
-            border-radius: 0px;
-            overflow: hidden;
-            aspect-ratio: 1/1;
-            background: var(--bg-secondary);
-            border: 1px solid var(--border-color);
-            cursor: pointer;
-            transition: all 0.2s ease;
-            box-shadow: none;
-        }
-
-        .gallery-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.2s ease, opacity 0.2s ease;
-        }
-
-        .gallery-item:hover {
-            background: var(--bg-secondary);
-            border-color: var(--text-secondary);
-            box-shadow: none;
-            transform: none;
-        }
-
-        .gallery-item:hover img {
-            transform: scale(1.05);
-            opacity: 0.8;
-        }
-
-        .download-overlay {
-            position: absolute;
-            inset: 0;
-            background: rgba(0, 0, 0, 0.3);
-            backdrop-filter: none;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            opacity: 0;
-            transition: opacity 0.2s ease;
-        }
-        
-        .gallery-item:hover .download-overlay {
-            opacity: 1;
-        }
-
-        @media (max-width: 600px) {
-            .download-overlay {
-                background: rgba(0, 0, 0, 0.3);
-                align-items: center;
-                padding-bottom: 0px;
-                opacity: 1;
-            }
-        }
-
-        .dl-icon-btn {
-            width: 40px;
-            height: 40px;
-            border-radius: 0px;
-            background: rgba(255, 255, 255, 0.8);
-            border: none;
-            color: #000000;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            box-shadow: none;
-        }
-        
-        .dl-icon-btn:hover {
-            background: #ffffff;
-            transform: scale(1.05);
-            box-shadow: none;
-        }
-
         footer {
             text-align: center;
             margin-top: 40px;
@@ -466,35 +340,6 @@
             font-size: 0.85rem;
             letter-spacing: 0px;
             border-top: 1px solid var(--border-color);
-        }
-
-        /* Toast Notification */
-        #toast {
-            visibility: hidden;
-            min-width: 280px;
-            background: var(--text-primary);
-            backdrop-filter: none;
-            color: var(--bg-primary);
-            text-align: center;
-            border-radius: 0px;
-            padding: 14px 24px;
-            position: fixed;
-            z-index: 100;
-            left: 50%;
-            bottom: 30px;
-            transform: translateX(-50%);
-            border: none;
-            font-size: 0.9rem;
-            font-weight: 500;
-            letter-spacing: 0px;
-            opacity: 0;
-            transition: all 0.3s ease;
-            box-shadow: none;
-        }
-        
-        #toast.show {
-            visibility: visible;
-            opacity: 1;
         }
 
         /* --- MODAL STYLES --- */
@@ -604,6 +449,9 @@
                 <a href="https://instagram.com/varad_jogani" target="_blank" class="link-btn">
                     <i class="fab fa-instagram"></i> Instagram
                 </a>
+                <a href="https://instagram.com/world_of__lens" target="_blank" class="link-btn">
+                    <i class="fab fa-instagram"></i> Instagram (World of Lens)
+                </a>
                 <a href="https://x.com/varad_jogani" target="_blank" class="link-btn">
                     <i class="fab fa-twitter"></i> Twitter / X
                 </a>
@@ -613,61 +461,10 @@
                 <a href="mailto:varadjogani99@gmail.com" class="link-btn">
                     <i class="fas fa-envelope"></i> Contact Me
                 </a>
-                
-                <button onclick="switchView('gallery')" class="link-btn special-btn">
-                    <i class="fas fa-camera-retro"></i> Full Res Downloads
-                </button>
             </main>
 
             <footer>
                 <p>&copy; 2026 Varad Jogani</p>
-            </footer>
-        </div>
-
-        <div id="gallery-view" class="view-section view-hidden-right">
-            <nav class="nav-header">
-                <button onclick="switchView('home')" class="back-btn">
-                    <i class="fas fa-chevron-left"></i> Back
-                </button>
-            </nav>
-
-            <header class="profile-header">
-                <h2>Downloads</h2>
-                <p class="subtitle">Tap to download full resolution</p>
-            </header>
-
-            <div class="gallery-grid">
-                <div class="gallery-item" onclick="downloadImage('https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=1920', 'landscape.jpg')">
-                    <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=400" alt="Landscape">
-                    <div class="download-overlay">
-                        <div class="dl-icon-btn"><i class="fas fa-arrow-down"></i></div>
-                    </div>
-                </div>
-
-                <div class="gallery-item" onclick="downloadImage('https://images.unsplash.com/photo-1472214103451-9374bd1c798e?w=1920', 'nature.jpg')">
-                    <img src="https://images.unsplash.com/photo-1472214103451-9374bd1c798e?w=400" alt="Nature">
-                    <div class="download-overlay">
-                        <div class="dl-icon-btn"><i class="fas fa-arrow-down"></i></div>
-                    </div>
-                </div>
-
-                <div class="gallery-item" onclick="downloadImage('https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=1920', 'forest.jpg')">
-                    <img src="https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=400" alt="Forest">
-                    <div class="download-overlay">
-                        <div class="dl-icon-btn"><i class="fas fa-arrow-down"></i></div>
-                    </div>
-                </div>
-
-                <div class="gallery-item" onclick="downloadImage('https://images.unsplash.com/photo-1501854140884-074bf86ee91c?w=1920', 'mountain.jpg')">
-                    <img src="https://images.unsplash.com/photo-1501854140884-074bf86ee91c?w=400" alt="Mountain">
-                    <div class="download-overlay">
-                        <div class="dl-icon-btn"><i class="fas fa-arrow-down"></i></div>
-                    </div>
-                </div>
-            </div>
-            
-            <footer>
-                <p>Free for personal use.</p>
             </footer>
         </div>
 
@@ -679,8 +476,6 @@
             <img id="modalImage" src="" alt="Profile Picture">
         </div>
     </div>
-
-    <div id="toast">Downloading image...</div>
 
     <script>
         // --- AGE CALCULATION FOR BIRTHDAY (25th December) ---
@@ -714,67 +509,6 @@
             updateAge();
             setInterval(updateAge, 24 * 60 * 60 * 1000);
         }, timeUntilMidnight);
-
-        // --- VIEW SWITCHING LOGIC ---
-        function switchView(viewName) {
-            const home = document.getElementById('home-view');
-            const gallery = document.getElementById('gallery-view');
-
-            if (viewName === 'gallery') {
-                // Animate Home Out to Left
-                home.classList.remove('view-active');
-                home.classList.add('view-hidden-left');
-                
-                // Animate Gallery In from Right
-                gallery.classList.remove('view-hidden-right');
-                gallery.classList.add('view-active');
-            } else {
-                // Animate Gallery Out to Right
-                gallery.classList.remove('view-active');
-                gallery.classList.add('view-hidden-right');
-
-                // Animate Home In from Left
-                home.classList.remove('view-hidden-left');
-                home.classList.add('view-active');
-            }
-        }
-
-        // --- DOWNLOAD LOGIC ---
-        // Forces browser to download image blob rather than opening in tab
-        async function downloadImage(imageSrc, fileName) {
-            showToast("Starting download...");
-            
-            try {
-                const response = await fetch(imageSrc);
-                const blob = await response.blob();
-                
-                const url = window.URL.createObjectURL(blob);
-                const a = document.createElement('a');
-                
-                a.style.display = 'none';
-                a.href = url;
-                a.download = fileName;
-                
-                document.body.appendChild(a);
-                a.click();
-                
-                window.URL.revokeObjectURL(url);
-                document.body.removeChild(a);
-                showToast("Download Complete!");
-            } catch (error) {
-                console.error('Download failed:', error);
-                showToast("Error. Opening in new tab.");
-                window.open(imageSrc, '_blank');
-            }
-        }
-
-        // --- TOAST NOTIFICATION ---
-        function showToast(message) {
-            const toast = document.getElementById("toast");
-            toast.innerText = message;
-            toast.className = "show";
-            setTimeout(function(){ toast.className = toast.className.replace("show", ""); }, 3000);
-        }
 
         // --- IMAGE MODAL LOGIC ---
         function openImageModal(imageSrc) {
